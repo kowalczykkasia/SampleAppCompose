@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SampleAppCompose</string>
+    <string name="title_storage">storage</string>
+</resources>
