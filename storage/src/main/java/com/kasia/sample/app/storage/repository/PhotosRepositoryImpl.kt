@@ -11,7 +11,7 @@ class PhotosRepositoryImpl(
     override fun getPhotos() = dao.getAllPhotos()
 
     override suspend fun insertPhotos() {
-        dao.insertPhotosResponseModel(service.getPhotos())
+        dao.insertNewPhotos(service.getPhotos())
     }
 
     override fun deleteAllPhotos() {

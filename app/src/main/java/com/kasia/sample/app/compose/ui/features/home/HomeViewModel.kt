@@ -1,9 +1,9 @@
-package com.kasia.sample.app.compose.ui.features.screens
+package com.kasia.sample.app.compose.ui.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kasia.sample.app.storage.usecases.GetAllPhotosUseCaseImpl
-import com.kasia.sample.app.storage.usecases.RefreshPhotosDataUseCaseImpl
+import com.kasia.sample.app.storage.usecases.GetAllPhotosUseCase
+import com.kasia.sample.app.storage.usecases.RefreshPhotosDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,8 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getAllPhotosUseCase: GetAllPhotosUseCaseImpl,
-    private val refreshPhotosDataUseCaseImpl: RefreshPhotosDataUseCaseImpl
+    private val getAllPhotosUseCase: GetAllPhotosUseCase,
+    private val refreshPhotosDataUseCaseImpl: RefreshPhotosDataUseCase
 ) : ViewModel() {
 
     val photosList by lazy {
@@ -20,6 +20,10 @@ class HomeViewModel @Inject constructor(
     }
 
     init {
+        refreshData()
+    }
+
+    private fun refreshData(){
         viewModelScope.launch(Dispatchers.IO) {
             refreshPhotosDataUseCaseImpl.execute()
         }

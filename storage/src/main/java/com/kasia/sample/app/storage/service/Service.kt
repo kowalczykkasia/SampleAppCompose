@@ -1,15 +1,17 @@
 package com.kasia.sample.app.storage.service
 
-import com.kasia.sample.app.storage.models.PhotosResponseModel
+import com.kasia.sample.app.storage.BuildConfig
+import com.kasia.sample.app.storage.models.Item
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface Service {
 
-    @GET("photos_public.gne")
+    @GET("v1/images")
     suspend fun getPhotos(
-        @Query("format") format: String = "json",
-        @Query("tags") tags: String = "cat",
-        @Query("nojsoncallback") noJsonCallback: Int = 1, //todo
-    ): PhotosResponseModel
+        @Query("limit") limit: Int = 10,
+        @Query("page") page: Int = 0,
+        @Header("x-api-key") apiKey: String = BuildConfig.API_KEY
+    ): List<Item>
 }

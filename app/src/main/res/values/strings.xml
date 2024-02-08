@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SampleAppCompose</string>
     <string name="title_storage">storage</string>
+    <string name="details">Cat Details</string>
 </resources>

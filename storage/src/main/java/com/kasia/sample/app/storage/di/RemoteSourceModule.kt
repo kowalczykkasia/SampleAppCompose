@@ -45,7 +45,7 @@ object RemoteSourceModule {
         .Builder()
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttpClient)
-        .baseUrl("https://api.flickr.com/services/feeds/") //todo
+        .baseUrl(BuildConfig.BASE_URL)
         .build()
 
     @Provides

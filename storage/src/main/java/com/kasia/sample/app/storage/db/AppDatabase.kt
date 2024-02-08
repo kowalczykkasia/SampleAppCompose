@@ -6,16 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.kasia.sample.app.storage.db.dao.PhotosDao
-import com.kasia.sample.app.storage.models.PhotosResponseModel
+import com.kasia.sample.app.storage.models.Item
 
 @Database(
     entities = [
-        PhotosResponseModel::class
+        Item::class
     ],
     version = VERSION_NUMBER, exportSchema = false
 )
 
-@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun photosDao(): PhotosDao

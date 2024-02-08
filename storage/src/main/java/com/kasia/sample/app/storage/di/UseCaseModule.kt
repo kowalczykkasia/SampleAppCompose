@@ -1,7 +1,9 @@
 package com.kasia.sample.app.storage.di
 
 import com.kasia.sample.app.storage.repository.PhotosRepositoryImpl
+import com.kasia.sample.app.storage.usecases.GetAllPhotosUseCase
 import com.kasia.sample.app.storage.usecases.GetAllPhotosUseCaseImpl
+import com.kasia.sample.app.storage.usecases.RefreshPhotosDataUseCase
 import com.kasia.sample.app.storage.usecases.RefreshPhotosDataUseCaseImpl
 import dagger.Module
 import dagger.Provides
@@ -17,11 +19,11 @@ object UseCaseModule {
     @Singleton
     fun provideGetAllPhotosUseCase(
         photosRepository: PhotosRepositoryImpl
-    ): GetAllPhotosUseCaseImpl = GetAllPhotosUseCaseImpl(photosRepository)
+    ): GetAllPhotosUseCase = GetAllPhotosUseCaseImpl(photosRepository)
 
     @Provides
     @Singleton
     fun provideRefreshPhotosDataUseCase(
         photosRepository: PhotosRepositoryImpl
-    ): RefreshPhotosDataUseCaseImpl = RefreshPhotosDataUseCaseImpl(photosRepository)
+    ): RefreshPhotosDataUseCase = RefreshPhotosDataUseCaseImpl(photosRepository)
 }

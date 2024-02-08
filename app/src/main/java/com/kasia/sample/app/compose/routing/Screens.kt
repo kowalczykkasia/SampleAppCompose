@@ -48,4 +48,5 @@ sealed class Screen(val route: String) {
   }
 
   object ListScreen : Screen("ListScreen")
+  object DetailsScreen : Screen("DetailsScreen")
 }
