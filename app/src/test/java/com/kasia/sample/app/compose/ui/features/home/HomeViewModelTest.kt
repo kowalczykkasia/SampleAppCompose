@@ -7,6 +7,7 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import com.google.common.truth.Truth.assertThat
+import com.kasia.sample.app.storage.models.Item
 import com.kasia.sample.app.storage.usecases.GetAllPhotosUseCase
 import com.kasia.sample.app.storage.usecases.RefreshPhotosDataUseCase
 import com.nhaarman.mockitokotlin2.mock
@@ -55,26 +56,10 @@ class HomeViewModelTest {
     companion object {
         val ALL_PHOTOS =  listOf(
             Item(
-                "author",
-                "authorId",
-                "dateTaken",
-                "description",
-                "link",
-                Media("url"),
-                "published",
-                "tags",
-                "title"
+                "createdAt", 0, "0", "name", "subId", "url", 0
             ),
             Item(
-                "author2",
-                "authorId2",
-                "dateTaken2",
-                "description2",
-                "link2",
-                Media("url2"),
-                "published2",
-                "tags2",
-                "title2"
+                "createdAt", 0, "1", "name", "subId", "url", 0
             )
         )
     }
