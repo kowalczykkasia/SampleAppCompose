@@ -4,13 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import com.kasia.sample.app.storage.db.dao.PhotosDao
-import com.kasia.sample.app.storage.models.Item
 
 @Database(
     entities = [
-        Item::class
+        ItemModel::class
     ],
     version = VERSION_NUMBER, exportSchema = false
 )

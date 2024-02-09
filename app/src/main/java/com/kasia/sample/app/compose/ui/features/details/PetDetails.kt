@@ -24,20 +24,19 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.kasia.sample.app.compose.MainActivityViewModel
 import com.kasia.sample.app.compose.R
-import com.kasia.sample.app.storage.models.Item
+import com.kasia.sample.app.storage.db.ItemModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PetDetails(viewModel: MainActivityViewModel, onNavigateBack: () -> Unit = {}) {
-    val item: Item by viewModel.detailsEntry
-        .collectAsState(Item())
+    val item: ItemModel by viewModel.detailsEntry
+        .collectAsState(ItemModel("", 0, "","","","", 0))
 
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 

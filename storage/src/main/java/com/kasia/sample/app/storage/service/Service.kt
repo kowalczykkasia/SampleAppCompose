@@ -1,7 +1,7 @@
 package com.kasia.sample.app.storage.service
 
 import com.kasia.sample.app.storage.BuildConfig
-import com.kasia.sample.app.storage.models.Item
+import com.kasia.sample.app.domain.models.Item
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query

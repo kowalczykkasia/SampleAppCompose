@@ -1,10 +1,10 @@
 package com.kasia.sample.app.storage.di
 
-import com.kasia.sample.app.storage.repository.PhotosRepositoryImpl
-import com.kasia.sample.app.storage.usecases.GetAllPhotosUseCase
-import com.kasia.sample.app.storage.usecases.GetAllPhotosUseCaseImpl
-import com.kasia.sample.app.storage.usecases.RefreshPhotosDataUseCase
-import com.kasia.sample.app.storage.usecases.RefreshPhotosDataUseCaseImpl
+import com.kasia.sample.app.domain.repository.PhotosRepository
+import com.kasia.sample.app.domain.usecases.GetAllPhotosUseCase
+import com.kasia.sample.app.domain.usecases.RefreshPhotosDataUseCase
+import com.kasia.sample.app.storage.usecase.GetAllPhotosUseCaseImpl
+import com.kasia.sample.app.storage.usecase.RefreshPhotosDataUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,12 +18,14 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetAllPhotosUseCase(
-        photosRepository: PhotosRepositoryImpl
-    ): GetAllPhotosUseCase = GetAllPhotosUseCaseImpl(photosRepository)
+        photosRepository: PhotosRepository
+    ): GetAllPhotosUseCase =
+        GetAllPhotosUseCaseImpl(photosRepository)
 
     @Provides
     @Singleton
     fun provideRefreshPhotosDataUseCase(
-        photosRepository: PhotosRepositoryImpl
-    ): RefreshPhotosDataUseCase = RefreshPhotosDataUseCaseImpl(photosRepository)
+        photosRepository: PhotosRepository
+    ): RefreshPhotosDataUseCase =
+        RefreshPhotosDataUseCaseImpl(photosRepository)
 }

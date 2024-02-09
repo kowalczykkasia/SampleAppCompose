@@ -1,10 +1,7 @@
-package com.kasia.sample.app.storage.usecases
+package com.kasia.sample.app.storage.usecase
 
-import com.kasia.sample.app.storage.repository.PhotosRepository
-
-interface RefreshPhotosDataUseCase {
-    suspend fun execute()
-}
+import com.kasia.sample.app.domain.repository.PhotosRepository
+import com.kasia.sample.app.domain.usecases.RefreshPhotosDataUseCase
 
 class RefreshPhotosDataUseCaseImpl(
     private val photosRepository: PhotosRepository

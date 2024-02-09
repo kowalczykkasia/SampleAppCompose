@@ -17,11 +17,11 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.kasia.sample.app.compose.MainActivityViewModel
-import com.kasia.sample.app.storage.models.Item
+import com.kasia.sample.app.storage.db.ItemModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun ImageItem(item: Item, viewModel: MainActivityViewModel, onNavigateToDetails: () -> Unit, modifier: Modifier = Modifier) {
+fun ImageItem(item: ItemModel, viewModel: MainActivityViewModel, onNavigateToDetails: () -> Unit, modifier: Modifier = Modifier) {
     Card(
         shape = RoundedCornerShape(4.dp), modifier = modifier
             .fillMaxSize()

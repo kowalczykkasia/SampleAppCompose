@@ -7,9 +7,10 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import com.google.common.truth.Truth.assertThat
-import com.kasia.sample.app.storage.models.Item
-import com.kasia.sample.app.storage.usecases.GetAllPhotosUseCase
-import com.kasia.sample.app.storage.usecases.RefreshPhotosDataUseCase
+import com.kasia.sample.app.domain.models.Item
+import com.kasia.sample.app.domain.usecases.GetAllPhotosUseCase
+import com.kasia.sample.app.domain.usecases.RefreshPhotosDataUseCase
+import com.kasia.sample.app.storage.db.ItemModel
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -25,9 +26,9 @@ class HomeViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var refreshPhotosDataUseCase: RefreshPhotosDataUseCase
+    private lateinit var refreshPhotosDataUseCase: com.kasia.sample.app.domain.usecases.RefreshPhotosDataUseCase
     @Mock
-    private lateinit var getAllPhotosUseCase: GetAllPhotosUseCase
+    private lateinit var getAllPhotosUseCase: com.kasia.sample.app.domain.usecases.GetAllPhotosUseCase
 
     private lateinit var viewModel: HomeViewModel
 
@@ -55,10 +56,10 @@ class HomeViewModelTest {
 
     companion object {
         val ALL_PHOTOS =  listOf(
-            Item(
+            ItemModel(
                 "createdAt", 0, "0", "name", "subId", "url", 0
             ),
-            Item(
+            ItemModel(
                 "createdAt", 0, "1", "name", "subId", "url", 0
             )
         )

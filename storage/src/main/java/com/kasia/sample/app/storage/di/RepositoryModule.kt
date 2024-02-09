@@ -1,7 +1,7 @@
 package com.kasia.sample.app.storage.di
 
+import com.kasia.sample.app.domain.repository.PhotosRepository
 import com.kasia.sample.app.storage.db.AppDatabase
-import com.kasia.sample.app.storage.repository.PhotosRepository
 import com.kasia.sample.app.storage.service.Service
 import com.kasia.sample.app.storage.repository.PhotosRepositoryImpl
 import dagger.Module
@@ -16,5 +16,9 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun providePhotosRepository(service: Service, appDatabase: AppDatabase): PhotosRepositoryImpl = PhotosRepositoryImpl(service, appDatabase.photosDao())
+    fun providePhotosRepository(service: Service, appDatabase: AppDatabase): PhotosRepository =
+        PhotosRepositoryImpl(
+            service,
+            appDatabase.photosDao()
+        )
 }

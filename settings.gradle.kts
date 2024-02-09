@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "SampleAppCompose"
 include(":app")
-include(":app:storage")
 include(":storage")
+include(":domain")

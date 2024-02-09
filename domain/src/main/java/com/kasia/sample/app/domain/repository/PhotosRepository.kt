@@ -1,6 +1,6 @@
-package com.kasia.sample.app.storage.repository
+package com.kasia.sample.app.domain.repository
 
-import com.kasia.sample.app.storage.models.Item
+import com.kasia.sample.app.domain.models.Item
 import kotlinx.coroutines.flow.Flow
 
 interface PhotosRepository {

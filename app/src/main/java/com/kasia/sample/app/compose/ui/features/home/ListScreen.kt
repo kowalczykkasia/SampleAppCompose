@@ -8,11 +8,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.integerResource
 import com.kasia.sample.app.compose.MainActivityViewModel
 import com.kasia.sample.app.compose.R
-import com.kasia.sample.app.storage.models.Item
+import com.kasia.sample.app.storage.db.ItemModel
 
 @Composable
 fun ListScreen(viewModel: HomeViewModel, mainActivityViewModel: MainActivityViewModel, onNavigateToDetails: () -> Unit) {
-    val photos: List<Item> by viewModel
+    val photos: List<ItemModel> by viewModel
         .photosList
         .collectAsState(initial = listOf())
 
