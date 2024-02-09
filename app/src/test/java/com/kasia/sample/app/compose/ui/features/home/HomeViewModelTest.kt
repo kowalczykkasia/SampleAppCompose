@@ -56,10 +56,10 @@ class HomeViewModelTest {
 
     companion object {
         val ALL_PHOTOS =  listOf(
-            ItemModel(
+            Item(
                 "createdAt", 0, "0", "name", "subId", "url", 0
             ),
-            ItemModel(
+            Item(
                 "createdAt", 0, "1", "name", "subId", "url", 0
             )
         )
