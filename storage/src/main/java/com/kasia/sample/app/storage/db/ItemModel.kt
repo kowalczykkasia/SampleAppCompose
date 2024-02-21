@@ -2,7 +2,6 @@ package com.kasia.sample.app.storage.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import com.kasia.sample.app.domain.models.Item
 
 @Entity(tableName = "photos_table")

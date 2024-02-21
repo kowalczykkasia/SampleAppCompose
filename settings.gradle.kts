@@ -17,3 +17,5 @@ rootProject.name = "SampleAppCompose"
 include(":app")
 include(":storage")
 include(":domain")
+include(":network")
+include(":feature")

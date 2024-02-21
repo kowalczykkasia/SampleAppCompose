@@ -29,14 +29,14 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.kasia.sample.app.compose.MainActivityViewModel
 import com.kasia.sample.app.compose.R
-import com.kasia.sample.app.storage.db.ItemModel
+import com.kasia.sample.app.domain.models.Item
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PetDetails(viewModel: MainActivityViewModel, onNavigateBack: () -> Unit = {}) {
-    val item: ItemModel by viewModel.detailsEntry
-        .collectAsState(ItemModel("", 0, "","","","", 0))
+    val item: Item by viewModel.detailsEntry
+        .collectAsState(Item())
 
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 

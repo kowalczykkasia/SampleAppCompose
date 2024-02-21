@@ -1,35 +1,42 @@
 package com.kasia.sample.app.compose.ui.features.home
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kasia.sample.app.domain.usecases.GetAllPhotosUseCase
-import com.kasia.sample.app.domain.usecases.RefreshPhotosDataUseCase
-import com.kasia.sample.app.storage.db.ItemModel
-import com.kasia.sample.app.storage.usecase.GetAllPhotosUseCaseImpl
-import com.kasia.sample.app.storage.usecase.RefreshPhotosDataUseCaseImpl
+import com.kasia.sample.app.compose.base.BaseViewModel
+import com.kasia.sample.app.domain.models.Item
+import com.kasia.sample.app.domain.usecases.FetchAndSaveDataUseCase
+import com.kasia.sample.app.domain.usecases.LoadLocalDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getAllPhotosUseCase: GetAllPhotosUseCase, //should use GetAllPhotosUseCaseImpl or GetAllPhotosUseCase? => GetAllPhotosUseCase is in domain, so shouldnt be used by UI
-    private val refreshPhotosDataUseCaseImpl: RefreshPhotosDataUseCase
-) : ViewModel() {
+    private val fetchAndSaveDataUseCase: FetchAndSaveDataUseCase,
+    private val loadLocalDataUseCase: LoadLocalDataUseCase
+) : BaseViewModel() {
 
-    val photosList by lazy {
-        getAllPhotosUseCase.execute().map { it.map { ItemModel.fromItem(it) } } //todo
-    }
+    private var _photosList = MutableStateFlow(listOf<Item>())
+    val photosList: Flow<List<Item>> = _photosList
 
     init {
+        loadLocalData()
         refreshData()
     }
 
-    private fun refreshData() {
+    private fun loadLocalData(){
         viewModelScope.launch(Dispatchers.IO) {
-            refreshPhotosDataUseCaseImpl.execute()
+            loadLocalDataUseCase.execute().collect {
+                _photosList.emit(it)
+            }
+        }
+    }
+
+    private fun refreshData() {
+        launch {
+            fetchAndSaveDataUseCase.execute()
         }
     }
 }
