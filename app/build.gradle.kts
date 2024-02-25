@@ -97,8 +97,8 @@ dependencies {
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
-    //Glide
-    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.0.0-rc01")
     //Hilt
     val hiltVersion = "2.50"
     implementation("com.google.dagger:hilt-android:$hiltVersion")

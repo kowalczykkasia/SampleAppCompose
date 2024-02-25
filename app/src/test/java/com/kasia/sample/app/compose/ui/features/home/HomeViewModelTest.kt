@@ -13,6 +13,7 @@ import com.kasia.sample.app.domain.usecases.LoadLocalDataUseCase
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -35,16 +36,14 @@ class HomeViewModelTest {
     fun setUp() = runBlocking {
         fetchAndSaveDataUseCase = mock()
         loadLocalDataUseCase = mock()
+        whenever(loadLocalDataUseCase.execute()).thenReturn(flowOf(ALL_PHOTOS))
         viewModel = HomeViewModel(fetchAndSaveDataUseCase, loadLocalDataUseCase)
     }
 
     @ExperimentalCoroutinesApi
     @Test
     fun `on getPhotosList should load all photos`() = runTest {
-        whenever(loadLocalDataUseCase.execute()).thenReturn(flowOf(ALL_PHOTOS))
-        viewModel.photosList.collect {
-            assertThat(it).isEqualTo(ALL_PHOTOS)
-        }
+        assertThat(viewModel.photosList.firstOrNull()).isEqualTo(ALL_PHOTOS)
         verify(loadLocalDataUseCase, times(1)).execute()
     }
 

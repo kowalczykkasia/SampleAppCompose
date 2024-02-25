@@ -1,5 +1,6 @@
 package com.kasia.sample.app.compose.ui.features.home
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.kasia.sample.app.compose.base.BaseViewModel
 import com.kasia.sample.app.domain.models.Item

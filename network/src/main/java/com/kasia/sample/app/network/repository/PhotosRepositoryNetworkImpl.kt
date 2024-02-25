@@ -6,5 +6,7 @@ import com.kasia.sample.app.network.service.PhotoService
 internal class PhotosRepositoryNetworkImpl (
     private val service: PhotoService
 ): PhotosRepositoryNetwork {
-    override suspend fun fetchPhotos(): List<Item> = service.getPhotos()
+    override suspend fun fetchPhotos(): List<Item> = service.getPhotos().map {
+        it.toItem()
+    }
 }

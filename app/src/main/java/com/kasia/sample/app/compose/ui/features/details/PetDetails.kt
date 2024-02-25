@@ -1,11 +1,14 @@
 package com.kasia.sample.app.compose.ui.features.details
 
 import android.annotation.SuppressLint
+import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -25,13 +28,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import coil.compose.rememberAsyncImagePainter
 import com.kasia.sample.app.compose.MainActivityViewModel
 import com.kasia.sample.app.compose.R
 import com.kasia.sample.app.domain.models.Item
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PetDetails(viewModel: MainActivityViewModel, onNavigateBack: () -> Unit = {}) {
@@ -69,10 +70,11 @@ fun PetDetails(viewModel: MainActivityViewModel, onNavigateBack: () -> Unit = {}
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                GlideImage(
-                    model = item.url,
+                Image(
+                    painter = rememberAsyncImagePainter(item.url),
                     contentDescription = "Image",
                     modifier = Modifier
+                        .size(250.dp)
                         .clickable { }
                         .align(Alignment.CenterHorizontally)
                 )

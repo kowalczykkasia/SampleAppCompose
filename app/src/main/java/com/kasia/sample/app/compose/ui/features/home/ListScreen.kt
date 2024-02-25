@@ -1,5 +1,6 @@
 package com.kasia.sample.app.compose.ui.features.home
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -19,19 +20,19 @@ fun ListScreen(viewModel: HomeViewModel, mainActivityViewModel: MainActivityView
     val photos: List<Item> by viewModel
         .photosList
         .collectAsState(initial = listOf())
+
     val error by viewModel.error.collectAsState(null)
     error?.let {
         Toast.makeText(LocalContext.current, it.message, Toast.LENGTH_SHORT).show()
     }
-    val list = photos
-    if (list.isNotEmpty()) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(integerResource(id = R.integer.column_count))
-        ) {
-            items(list.count()) { index ->
-                val item = list[index]
-                ImageItem(item = item, mainActivityViewModel, onNavigateToDetails)
-            }
+    Log.d("HALKO", "${photos}")
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(integerResource(id = R.integer.column_count))
+    ) {
+        Log.d("HALKO", "${photos.count()}")
+        items(photos.count()) { index ->
+            val item = photos[index]
+            ImageItem(item = item, mainActivityViewModel, onNavigateToDetails)
         }
     }
 }
