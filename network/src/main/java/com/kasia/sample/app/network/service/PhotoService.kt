@@ -1,6 +1,5 @@
 package com.kasia.sample.app.network.service
 
-import com.kasia.sample.app.domain.models.Item
 import com.kasia.sample.app.network.BuildConfig
 import com.kasia.sample.app.network.model.ItemResponseModel
 import retrofit2.http.GET

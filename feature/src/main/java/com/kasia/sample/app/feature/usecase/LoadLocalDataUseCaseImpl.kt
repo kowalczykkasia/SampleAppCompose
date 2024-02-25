@@ -6,7 +6,7 @@ import com.kasia.sample.app.domain.usecases.LoadLocalDataUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class LoadLocalDataUseCaseImpl @Inject constructor(
+internal class LoadLocalDataUseCaseImpl @Inject constructor(
     private val storageRepository: PhotosRepositoryStorage
 ) : LoadLocalDataUseCase {
 

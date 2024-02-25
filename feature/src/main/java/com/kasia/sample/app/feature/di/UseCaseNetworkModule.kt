@@ -11,7 +11,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class UseCaseNetworkModule {
+internal abstract class UseCaseNetworkModule {
 
     @Binds
     abstract fun bindFetchAndSaveDataUseCase(fetchAndSaveDataUseCaseImpl: FetchAndSaveDataUseCaseImpl) : FetchAndSaveDataUseCase

@@ -3,7 +3,7 @@ package com.kasia.sample.app.network.model
 import com.google.gson.annotations.SerializedName
 import com.kasia.sample.app.domain.models.Item
 
-data class ItemResponseModel(
+internal data class ItemResponseModel(
     @SerializedName("created_at") val createdAt: String,
     val height: Int,
     val id: String,
