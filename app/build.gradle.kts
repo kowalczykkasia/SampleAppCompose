@@ -13,6 +13,12 @@ android {
             keyAlias = "keystore"
             keyPassword = "sample"
         }
+        create("release") {
+            storeFile = file("../keystore.jks")
+            storePassword = "sample"
+            keyAlias = "keystore"
+            keyPassword = "sample"
+        }
     }
     namespace = "com.kasia.sample.app.compose"
     compileSdk = 34
@@ -33,13 +39,14 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
         debug {
-
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
