@@ -8,7 +8,7 @@ plugins {
 android {
     signingConfigs {
         getByName("debug") {
-            storeFile = file("/Users/kasia/Desktop/SampleApp_portfolio/keystore.jks")
+            storeFile = file("../keystore.jks")
             storePassword = "sample"
             keyAlias = "keystore"
             keyPassword = "sample"
