@@ -7,12 +7,13 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.verify
 import com.google.common.truth.Truth.assertThat
-import com.kasia.sample.app.storage.models.Item
-import com.kasia.sample.app.storage.usecases.GetAllPhotosUseCase
-import com.kasia.sample.app.storage.usecases.RefreshPhotosDataUseCase
+import com.kasia.sample.app.domain.models.Item
+import com.kasia.sample.app.domain.usecases.FetchAndSaveDataUseCase
+import com.kasia.sample.app.domain.usecases.LoadLocalDataUseCase
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -25,32 +26,30 @@ class HomeViewModelTest {
     val rule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var refreshPhotosDataUseCase: RefreshPhotosDataUseCase
+    private lateinit var fetchAndSaveDataUseCase: FetchAndSaveDataUseCase
     @Mock
-    private lateinit var getAllPhotosUseCase: GetAllPhotosUseCase
+    private lateinit var loadLocalDataUseCase: LoadLocalDataUseCase
 
     private lateinit var viewModel: HomeViewModel
 
     @Before
     fun setUp() = runBlocking {
-        refreshPhotosDataUseCase = mock()
-        getAllPhotosUseCase = mock()
-        viewModel = HomeViewModel(getAllPhotosUseCase, refreshPhotosDataUseCase)
+        fetchAndSaveDataUseCase = mock()
+        loadLocalDataUseCase = mock()
+        whenever(loadLocalDataUseCase.execute()).thenReturn(flowOf(ALL_PHOTOS))
+        viewModel = HomeViewModel(fetchAndSaveDataUseCase, loadLocalDataUseCase)
     }
 
     @ExperimentalCoroutinesApi
     @Test
     fun `on getPhotosList should load all photos`() = runTest {
-        whenever(getAllPhotosUseCase.execute()).thenReturn(flowOf(ALL_PHOTOS))
-        viewModel.photosList.collect {
-            assertThat(it).isEqualTo(ALL_PHOTOS)
-        }
-        verify(getAllPhotosUseCase, times(1)).execute()
+        assertThat(viewModel.photosList.firstOrNull()).isEqualTo(ALL_PHOTOS)
+        verify(loadLocalDataUseCase, times(1)).execute()
     }
 
     @Test
     fun `init block should call refreshData`() = runTest {
-        verify(refreshPhotosDataUseCase, times(1)).execute()
+        verify(fetchAndSaveDataUseCase, times(1)).execute()
     }
 
     companion object {

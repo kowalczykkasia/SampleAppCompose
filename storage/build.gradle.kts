@@ -1,16 +1,9 @@
-import java.io.FileInputStream
-import java.util.Properties
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
 }
-
-val localPropertiesFile: File = rootProject.file("secret.properties")
-val localProperties = Properties()
-localProperties.load(FileInputStream(localPropertiesFile))
 
 android {
     namespace = "com.kasia.sample.app.storage"
@@ -21,22 +14,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-            buildConfigField("String", "BASE_URL",  localProperties.getProperty("BASE_URL"))
-            buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
-        }
-        debug {
-            buildConfigField("String", "BASE_URL",  localProperties.getProperty("BASE_URL"))
-            buildConfigField("String", "API_KEY", localProperties.getProperty("API_KEY"))
-        }
     }
     buildFeatures {
         buildConfig = true
@@ -51,7 +28,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":domain"))
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -62,11 +39,7 @@ dependencies {
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
-    val retrofitVersion = "2.9.0"
-    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     val hiltVersion = "2.50"
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
-    val loggingVersion = "4.12.0"
-    implementation("com.squareup.okhttp3:logging-interceptor:$loggingVersion")
 }
